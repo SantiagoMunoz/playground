@@ -15,6 +15,7 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'Valloric/YouCompleteMe'		
 Plugin 'vim-airline/vim-airline'
+Plugin 'vim-syntastic/syntastic'
 
 " The following are examples of different formats supported.
 " Keep Plugin commands between vundle#begin/end.
@@ -39,3 +40,20 @@ set shiftwidth=4
 set expandtab
 " Make status bar always show
 set laststatus=2
+
+let g:syntastic_c_checkers = ['gcc']
+" NerdTree
+silent! map <F2> :NERDTreeToggle<CR>
+silent! map <F3> :NERDTreeFind<CR>
+
+" Remap escape to jk for convenience
+inoremap jk <ESC>
+" Syntax folding based on syntax
+set foldmethod=syntax
+"highlight current search
+set hlsearch
+" Faster split navigation
+inoremap <C-l> <C-w>l
+inoremap <C-h> <C-w>h
+inoremap <C-k> <C-w>k
+inoremap <C-j> <C-w>j
