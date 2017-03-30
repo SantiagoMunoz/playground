@@ -53,7 +53,8 @@ set foldmethod=syntax
 "highlight current search
 set hlsearch
 " Faster split navigation
-inoremap <C-l> <C-w>l
-inoremap <C-h> <C-w>h
-inoremap <C-k> <C-w>k
-inoremap <C-j> <C-w>j
+map <C-l> <C-w>l
+map <C-h> <C-w>h
+map <C-k> <C-w>k
+map <C-j> <C-w>j
+map <C-/> : tab split<CR>:exec("tag ".expand("<cword>"))<CR>
