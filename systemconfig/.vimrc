@@ -15,6 +15,7 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'Valloric/YouCompleteMe'		
 Plugin 'vim-airline/vim-airline'
+Plugin 'enricobacis/vim-airline-clock'
 Plugin 'vim-syntastic/syntastic'
 
 " The following are examples of different formats supported.
@@ -27,6 +28,10 @@ Plugin 'L9'
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
+
+" Configure vim-airline clock. Extremely important!
+let g:airline#extensions#clock#format = '%H:%M:%S'
+let g:airline#extensions#clock#updatetime = 1000
 
 " Syntax highlighting
 syntax on
