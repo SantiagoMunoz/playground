@@ -12,11 +12,14 @@ Plugin 'VundleVim/Vundle.vim'
 
 Plugin 'suoto/vim-hdl'
 Plugin 'scrooloose/nerdtree'
+Plugin 'majutsushi/tagbar'
 Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'jakedouglas/exuberant-ctags'
 Plugin 'Valloric/YouCompleteMe'		
 Plugin 'vim-airline/vim-airline'
 Plugin 'enricobacis/vim-airline-clock'
 Plugin 'vim-syntastic/syntastic'
+Plugin 'colepeters/spacemacs-theme.vim'
 
 " The following are examples of different formats supported.
 " Keep Plugin commands between vundle#begin/end.
@@ -32,6 +35,13 @@ filetype plugin indent on    " required
 " Configure vim-airline clock. Extremely important!
 let g:airline#extensions#clock#format = '%H:%M:%S'
 let g:airline#extensions#clock#updatetime = 1000
+
+"spacemacs theme
+if (has("termguicolors"))
+    set termguicolors
+endif
+set background=dark
+colorscheme spacemacs-theme
 
 " Syntax highlighting
 syntax on
@@ -49,7 +59,7 @@ set laststatus=2
 let g:syntastic_c_checkers = ['gcc']
 " NerdTree
 silent! map <F2> :NERDTreeToggle<CR>
-silent! map <F3> :NERDTreeFind<CR>
+silent! map <F3> :TagbarToggle<CR>
 
 " Remap escape to jk for convenience
 inoremap jk <ESC>
