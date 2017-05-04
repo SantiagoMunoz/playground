@@ -5,8 +5,8 @@
 #include <time.h>
 #include <SDL2/SDL.h>
 
-#define SCREEN_H        32
-#define SCREEN_W        64
+#define SCREEN_H        32*4
+#define SCREEN_W        64*4
 SDL_Window *window;
 SDL_Renderer *ren;
 SDL_Event event;
@@ -21,11 +21,7 @@ int main(){
     if(SDL_Init(SDL_INIT_VIDEO) != 0)
         printf("SDL Init error!\n");
     SDL_EventState(SDL_MOUSEMOTION, SDL_IGNORE);
-    window = SDL_CreateWindow("Chip-8",SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 64, 32, SDL_WINDOW_SHOWN); //Each screen pixel is 4 pixel wide
-    ren = SDL_CreateRenderer(window, 1, SDL_RENDERER_SOFTWARE | SDL_RENDERER_PRESENTVSYNC);
-    if(ren == NULL){
-        printf("Unable to create renderer!\n");
-    }
+    SDL_CreateWindowAndRenderer(SCREEN_W, SCREEN_H, 0, &window, &ren);
     
     memset(screen, 0x00, SCREEN_W*SCREEN_H);
 
@@ -33,15 +29,15 @@ int main(){
         
         screen[x + y * SCREEN_H] = 0;
         x++;
-        if(x = SCREEN_W){
+        if(x == SCREEN_W){
             x = 0;
             y++;
         }
-        if(y = SCREEN_H)
+        if(y == SCREEN_H)
             y = 0;
         screen[x + y * SCREEN_H] = 1;
         update_screen();
-        SDL_Delay(1000);
+        SDL_Delay(200);
         while( (SDL_PollEvent(&event))){
             if(event.type == SDL_QUIT){
                 SDL_Quit();
@@ -55,20 +51,22 @@ int main(){
 void update_screen(){
     //Update the screen
 
-    unsigned char i, j;
+    int i, j;
 
-    SDL_SetRenderDrawColor(ren, 0, 0, 0, 255);
+    SDL_SetRenderDrawColor(ren, 0, 0, 0, 0);
     SDL_RenderClear(ren);
     SDL_SetRenderDrawColor(ren, 255, 255, 255, 255);
     printf("SDL error(Clear): %s\n", SDL_GetError());
 
-    for(j=0;j<32;j++){
-        for(i=0;i<64;i++){
-            if(screen[j*64+i] != 0){
-                SDL_RenderDrawPoint(ren, i, j);
-    printf("SDL error(DrawPoint): %s\n", SDL_GetError());
+    for(j=0;j<SCREEN_H;j++){
 
+        for(i=0;i<SCREEN_W;i++){
+
+            if(screen[j*SCREEN_W+i] != 0){
+                SDL_RenderDrawPoint(ren, i, j);
+                printf("SDL error(DrawPoint): %s\n", SDL_GetError());
             }
+
         }
     }
     SDL_RenderPresent(ren);
