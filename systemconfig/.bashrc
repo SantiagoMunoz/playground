@@ -10,7 +10,7 @@ alias ttag='ctags -R .'
 alias ll='ls -l'
 alias la='ls -la'
 alias gohome='shutdown now'
-asias automount='udiskie --tray --use-udisks2'
+alias automount='udiskie --tray --use-udisks2'
 
 #Default apps
 export BROWSER=firefox
