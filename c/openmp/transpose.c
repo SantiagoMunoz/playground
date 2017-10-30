@@ -42,7 +42,7 @@ int main(){
     //naive openmp transpose
     start = clock();
     
-    #pragma omp parallel num_threads(4) for collapse(2) private(i,j) 
+    #pragma omp parallel num_threads(4) for collapse(2) private(i,j) schedule(static)
     for(i=0;i<ROWS;i++)
         for(j=0;j<COLS;j++)
             transpose[j][i] = matrix[i][j];
@@ -64,8 +64,33 @@ int main(){
 
     cpu_time = 1000*((double)(end - start))/CLOCKS_PER_SEC;
     printf("omp (dynamic) transpose took %f ms\n", cpu_time);
-   
+
+    //openmp simd
+    start = clock();
     
+    #pragma omp simd collapse(2) 
+    for(i=0;i<ROWS;i++)
+        for(j=0;j<COLS;j++)
+            transpose[j][i] = matrix[i][j];
+
+    end  = clock();
+
+    cpu_time = 1000*((double)(end - start))/CLOCKS_PER_SEC;
+    printf("omp (simd) transpose took %f ms\n", cpu_time);
+
+     //openmp simd for
+    start = clock();
+    
+    #pragma omp parallel for simd collapse(2) private(i,j)
+    for(i=0;i<ROWS;i++)
+        for(j=0;j<COLS;j++)
+            transpose[j][i] = matrix[i][j];
+
+    end  = clock();
+
+    cpu_time = 1000*((double)(end - start))/CLOCKS_PER_SEC;
+    printf("omp (for simd) transpose took %f ms\n", cpu_time);
+   
     //Cleanup
     for(i=0;i<ROWS;i++){
         free(matrix[i]);
