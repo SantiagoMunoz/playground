@@ -2,7 +2,11 @@
 # bashrc 
 #
 
-#alias
+function mkcdir() {
+  mkdir -p -- "$1" &&
+    cd -P -- "$1"
+}
+
 alias prettyxml='xmllint --format - '
 alias kastocao='prev=$(fc -ln | tail -2 | head -1);gdb --args $prev'
 alias shin_count_lines='git ls-files | xargs cat | wc -l'
