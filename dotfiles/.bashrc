@@ -9,12 +9,10 @@ function mkcdir() {
 
 alias prettyxml='xmllint --format - '
 alias kastocao='prev=$(fc -ln | tail -2 | head -1);gdb --args $prev'
-alias shin_count_lines='git ls-files | xargs cat | wc -l'
 alias smake='make clean;clear;clear;make'
-alias ttag='ctags -R .'
 alias ll='ls -l'
 alias la='ls -la'
-alias gohome='shutdown now'
+
 alias automount='udiskie --tray --use-udisks2'
 
 #Default apps
@@ -26,3 +24,7 @@ export EDITOR=vim
 
 alias ls='ls --color=auto'
 PS1='[\u@\h \W]\$ '
+alias tmux="TERM=rxvt-unicode-256color tmux"
+
+# vi mode!
+set -o vi

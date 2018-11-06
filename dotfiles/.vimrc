@@ -36,10 +36,9 @@ syntax on
 set number
 " Line number color configuration
 highlight LineNr ctermfg=white ctermbg=grey
-" Tabs -> 4 spaces
-set tabstop=4
-set shiftwidth=4
-set expandtab
+" Tabs -> 8 spaces
+set tabstop=8
+set shiftwidth=8
 
 " Make status bar always show
 set laststatus=2
